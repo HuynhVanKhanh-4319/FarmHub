@@ -1,0 +1,43 @@
+﻿@model dynamic
+
+<h2>Tất cả mùa vụ</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên mùa vụ</th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày thu hoạch</th>
+            <th>Diện tích (ha)</th>
+            <th>Ghi chú</th>
+            <th>Giống cây trồng</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Name</td>
+                <td>@s.StartDate.ToString("dd/MM/yyyy")</td>
+                <td>@s.HarvestDate.ToString("dd/MM/yyyy")</td>
+                <td>@s.Area</td>
+                <td>@s.Notes</td>
+                <td>@s.CropName</td>
+                <td>
+                    @if (s.Status == "Đang diễn ra")
+                    {
+                        <span class="badge bg-success">@s.Status</span>
+                    }
+                    else if (s.Status == "Đã kết thúc")
+                    {
+                        <span class="badge bg-danger">@s.Status</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">@s.Status</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

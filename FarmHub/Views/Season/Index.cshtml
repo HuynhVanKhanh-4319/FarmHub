@@ -1,0 +1,137 @@
+﻿@model IEnumerable<Season>
+@{
+    ViewData["Title"] = "Mùa vụ của bạn";
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Ecotech2A - Nền tảng quản lý nông nghiệp thông minh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="hero bg-light py-5 text-center">
+        <div class="container">
+            <h1>🌾 Farmhub - Nông nghiệp thời 4.0</h1>
+            <p class="lead">Công cụ quản lý toàn diện cho mọi mùa vụ</p>
+        </div>
+    </div>
+
+
+    <div class="container mt-5">
+
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">@ViewData["Title"]</h2>
+            <a asp-action="Create" class="btn btn-success">+ Thêm mùa vụ</a>
+        </div>
+
+
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Tên mùa vụ</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày thu hoạch</th>
+                    <th>Diện tích (ha)</th>
+                    <th>Loại cây trồng</th>
+                    <th>Ghi chú</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.HarvestDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Area</td>
+                        <td>@item.Crop?.Name</td>
+                        <td>@item.Notes</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Sửa</a>
+                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline">
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xoá?')">Xoá</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+        <h3 class="mt-5 mb-3 text-center">📅 Lịch mùa vụ</h3>
+        <div id="calendar-container" class="p-3 bg-white border rounded shadow-sm mb-5 mt-4">
+
+            <div id="calendar" style="min-height: 500px;"></div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'vi',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+        @foreach (var season in Model)
+        {
+            <text>{
+                    title: @Html.Raw(Json.Serialize("🌾 " + season.Name)),
+                    start: '@season.StartDate.ToString("yyyy-MM-dd")',
+                    end: '@season.HarvestDate.AddDays(1).ToString("yyyy-MM-dd")',
+                    color: '#28a745'
+                },</text>
+
+            if (season.Schedules != null)
+            {
+                foreach (var schedule in season.Schedules)
+                {
+                    <text>{
+                            title: @Html.Raw(Json.Serialize("📌 " + schedule.Activity + " (" + season.Name + ")")),
+                            start: '@schedule.Date.ToString("yyyy-MM-dd")',
+                            color: '#ffc107'
+                    },</text>
+                }
+            }
+            if (season.Reports != null)
+            {
+                foreach (var report in season.Reports.Where(r => !r.IsDeleted))
+                {
+                    if (season.HarvestDate != null)
+                    {
+                        <text>{
+                                            
+                            title: @Html.Raw(Json.Serialize("📊 Báo cáo: " + season.Name)),
+                            start: '@season.HarvestDate.ToString("yyyy-MM-dd")',
+                            url: '@Url.Action("Edit", "Report", new { id = report.Id })',
+                            color: '#007bff'
+                         },</text>
+                    }
+                }
+            }
+        }
+                ],
+                dateClick: function(info) {
+                    window.location.href = '/report/create';
+                },
+
+            });
+            calendar.render();
+        });
+    </script>
+
+</body>
+</html>

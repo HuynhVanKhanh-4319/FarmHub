@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Mật độ lịch trình theo mùa vụ";
+    var labels = ViewBag.Labels as List<string>;
+    var data = ViewBag.Data as List<int>;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<canvas id="densityChart" width="600" height="300"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('densityChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(labels)),
+            datasets: [{
+                label: 'Số lượng lịch trình',
+                data: @Html.Raw(Json.Serialize(data)),
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Số lịch trình'
+                    }
+                }
+            }
+        }
+    });
+</script>

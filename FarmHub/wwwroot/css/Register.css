@@ -1,0 +1,81 @@
+
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #8BC34A;
+    --accent-color: #FFC107;
+    --background-color: #F1F8E9;
+    --text-dark: #2E7D32;
+}
+
+body {
+    background: linear-gradient(to right, #E8F5E9, #C8E6C9);
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+.agriculture-bg {
+    background: url('https://images.unsplash.com/photo-1464226184884-fa280b7c3558?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.agriculture-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(76, 175, 80, 0.9);
+}
+
+.logo {
+    width: 120px;
+    margin-bottom: 2rem;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(46, 125, 50, 0.1);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+.social-btn {
+    border: 1px solid #ddd;
+    padding: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dark);
+}
+
+.form-group {
+    position: relative;
+}

@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Thống kê sản lượng theo tháng";
+    var labels = ViewBag.Labels as List<string>;
+    var data = ViewBag.Data as List<double>;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<canvas id="monthlyYieldChart" width="600" height="300"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('monthlyYieldChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(labels)),
+            datasets: [{
+                label: 'Tổng sản lượng (kg)',
+                data: @Html.Raw(Json.Serialize(data)),
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Sản lượng (Tấn)'
+                    }
+                }
+            }
+        }
+    });
+</script>

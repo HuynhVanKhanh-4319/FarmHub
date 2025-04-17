@@ -1,0 +1,57 @@
+﻿@model Report
+
+@{
+    ViewData["Title"] = "Thêm báo cáo mới";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> - Nền tảng quản lý nông nghiệp thông minh</title>
+
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>🌾 Farmhub- Nông nghiệp thời 4.0</h1>
+            <p>Công cụ quản lý toàn diện cho mọi mùa vụ</p>
+            <a href="#dangky" class="cta-button">Bắt đầu ngay →</a>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h2 class="mb-4">@ViewData["Title"]</h2>
+
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="SeasonId" class="form-label">Chọn mùa vụ</label>
+                <select asp-for="SeasonId" asp-items="ViewBag.SeasonId" class="form-select"></select>
+                <span asp-validation-for="SeasonId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Yield" class="form-label">Sản lượng (tấn)</label>
+                <input asp-for="Yield" class="form-control" />
+                <span asp-validation-for="Yield" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Notes" class="form-label">Ghi chú</label>
+                <textarea asp-for="Notes" class="form-control"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </form>
+    </div>
+
+
+</body>
+</html>
+
+
+
+

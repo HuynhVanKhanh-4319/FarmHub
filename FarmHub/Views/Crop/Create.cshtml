@@ -1,0 +1,86 @@
+﻿@model Crop
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecotech2A - Nền tảng quản lý nông nghiệp thông minh</title>
+
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>🌾 Farmhub- Nông nghiệp thời 4.0</h1>
+            <p>Công cụ quản lý toàn diện cho mọi mùa vụ</p>
+            <a href="#dangky" class="cta-button">Bắt đầu ngay →</a>
+        </div>
+    </div>
+
+    <div class="agriculture-container">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-success text-white py-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-seedling fa-3x me-3"></i>
+                    <h2 class="mb-0">Thêm cây trồng mới</h2>
+                </div>
+            </div>
+
+            <div class="card-body p-5">
+                <form asp-action="Create" class="grow-form">
+                    <div class="form-group mb-4">
+                        <label class="form-label text-success fw-bold">
+                            <i class="fas fa-leaf me-2"></i>Tên cây trồng
+                        </label>
+                        <input asp-for="Name" class="form-control form-control-lg border-2 border-success"
+                               placeholder="Nhập tên cây trồng...">
+                        <span asp-validation-for="Name" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <a asp-action="Index" class="btn btn-outline-secondary w-100 py-3">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-success w-100 py-3">
+                                <i class="fas fa-save me-2"></i>Lưu lại
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+
+</body>
+</html>
+
+
+
+
+<style>
+    .agriculture-container {
+        background: url('/images/farm-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .grow-form input,
+    .grow-form textarea {
+        transition: all 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+        .grow-form input:focus,
+        .grow-form textarea:focus {
+            border-color: #198754 !important;
+            box-shadow: 0 0 10px rgba(25, 135, 84, 0.25);
+            background-color: white;
+        }
+</style>

@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Global Calendar";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div id="calendar"></div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendar');
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'vi',
+                height: 700,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listMonth'
+                },
+                events: '@Url.Action("GetCalendarEvents", "Report", new { area = "admin" })',
+                eventClick: function (info) {
+                    alert("🗓️ " + info.event.title + "\nNgày: " + info.event.start.toLocaleDateString());
+                }
+            });
+
+            calendar.render();
+        });
+    </script>
+}

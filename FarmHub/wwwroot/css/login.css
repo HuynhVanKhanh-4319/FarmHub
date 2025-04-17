@@ -1,0 +1,99 @@
+:root {
+    --primary-color: #4CAF50;
+    --google-red: #DB4437;
+    --facebook-blue: #3B5998;
+    --twitter-blue: #1DA1F2;
+}
+
+body {
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.container {
+    padding: 20px;
+    width: 100%;
+}
+
+.login-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto; 
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.1);
+}
+.agriculture-side {
+    background: url('https://images.unsplash.com/photo-1464226184884-fa280b7c3558') center/cover;
+    position: relative;
+    padding: 2rem;
+    color: white;
+}
+
+    .agriculture-side::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(76, 175, 80, 0.9);
+    }
+
+.social-login {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.google-btn {
+    background: white;
+    color: var(--google-red);
+    border-color: var(--google-red);
+}
+
+    .google-btn:hover {
+        background: var(--google-red);
+        color: white;
+    }
+
+.facebook-btn {
+    background: white;
+    color: var(--facebook-blue);
+    border-color: var(--facebook-blue);
+}
+
+    .facebook-btn:hover {
+        background: var(--facebook-blue);
+        color: white;
+    }
+
+.twitter-btn {
+    background: white;
+    color: var(--twitter-blue);
+    border-color: var(--twitter-blue);
+}
+
+    .twitter-btn:hover {
+        background: var(--twitter-blue);
+        color: white;
+    }
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}

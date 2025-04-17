@@ -1,0 +1,58 @@
+﻿@model Schedule
+@{
+    ViewData["Title"] = "Thêm lịch mùa vụ";
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecotech2A - Nền tảng quản lý nông nghiệp thông minh</title>
+
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>🌾 Farmhub- Nông nghiệp thời 4.0</h1>
+            <p>Công cụ quản lý toàn diện cho mọi mùa vụ</p>
+            <a href="#dangky" class="cta-button">Bắt đầu ngay →</a>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h2 class="mb-4 text-success">@ViewData["Title"]</h2>
+
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="Date" class="form-label">Ngày</label>
+                <input asp-for="Date" class="form-control" type="date" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Activity" class="form-label">Hoạt động</label>
+                <input asp-for="Activity" class="form-control" />
+                <span asp-validation-for="Activity" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SeasonId" class="form-label">Mùa vụ</label>
+                <select asp-for="SeasonId" asp-items="ViewBag.SeasonId" class="form-select"></select>
+
+                <span asp-validation-for="SeasonId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">Lưu lịch</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Quay lại</a>
+        </form>
+    </div>
+
+
+</body>
+</html>
+
+
+
+
+
+
